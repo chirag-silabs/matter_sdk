@@ -57,7 +57,8 @@ osTimerId_t sRetryTimer;
 void RetryConnectionTimerHandler(void * arg)
 {
 #if CHIP_CONFIG_ENABLE_ICD_SERVER
-    Silabs::WifiSleepManager::GetInstance().RequestHighPerformance();
+    // TODO: Chirag
+    // Silabs::WifiSleepManager::GetInstance().RequestHighPerformance();
 #endif // CHIP_CONFIG_ENABLE_ICD_SERVER
 
     if (wfx_connect_to_ap() != SL_STATUS_OK)
@@ -199,14 +200,16 @@ void wfx_retry_connection(uint16_t retryAttempt)
         }
 
 #if CHIP_CONFIG_ENABLE_ICD_SERVER
+        // TODO: Chirag remove the complete deep sleep and high sleep
         //  Remove High performance request before giving up due to a timer start error to save battery life
-        Silabs::WifiSleepManager::GetInstance().RemoveHighPerformanceRequest();
+        // Silabs::WifiSleepManager::GetInstance().RemoveHighPerformanceRequest();
 #endif // CHIP_CONFIG_ENABLE_ICD_SERVER
         return;
     }
 
 #if CHIP_CONFIG_ENABLE_ICD_SERVER
-    Silabs::WifiSleepManager::GetInstance().RemoveHighPerformanceRequest();
+    // TODO: Chirag
+    // Silabs::WifiSleepManager::GetInstance().RemoveHighPerformanceRequest();
 #endif // CHIP_CONFIG_ENABLE_ICD_SERVER
 
     ChipLogProgress(DeviceLayer, "wfx_retry_connection : Next attempt after %d Seconds", retryInterval);
